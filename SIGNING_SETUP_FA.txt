@@ -1,0 +1,20 @@
+تنظیم یک‌باره امضای ثابت GitHub Actions
+
+1) روی ویندوزی که Java/JDK دارد، PowerShell را در یک پوشه امن باز کنید و اجرا کنید:
+keytool -genkeypair -v -keystore almas-release.jks -alias almas_sales -keyalg RSA -keysize 2048 -validity 10000
+
+رمز دلخواه قوی انتخاب کنید و فایل almas-release.jks را در محل امن نگه دارید. این فایل را داخل Repository عمومی آپلود نکنید.
+
+2) Base64 فایل را بسازید:
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("almas-release.jks")) | Set-Content -NoNewline almas-release-base64.txt
+
+3) در GitHub repository > Settings > Secrets and variables > Actions چهار Repository Secret بسازید:
+ANDROID_KEYSTORE_BASE64 = محتوای کامل almas-release-base64.txt
+ANDROID_KEYSTORE_PASSWORD = رمز keystore
+ANDROID_KEY_ALIAS = almas_sales
+ANDROID_KEY_PASSWORD = رمز کلید (اگر هنگام keytool همان رمز را انتخاب کردید، همان مقدار)
+
+4) فایل .github/workflows/main.yml این Patch را جایگزین Workflow فعلی کنید.
+از Build بعدی APK با کلید ثابت ساخته می‌شود. applicationId ثابت ir.sejadalmas.salesagent است و versionCode در هر نسخه افزایش می‌یابد.
+
+نکته: اولین APK امضاشده با این کلید ممکن است نتواند روی APK Debug قبلی نصب شود چون امضا متفاوت است؛ فقط همین یک بار نسخه Debug قبلی را حذف و Release امضاشده را نصب کنید. از آن پس نسخه‌های بعدی روی همان اپ Update می‌شوند و دیگر حذف لازم نیست.
