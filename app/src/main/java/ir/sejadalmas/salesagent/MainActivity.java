@@ -1,5 +1,5 @@
 package ir.sejadalmas.salesagent;
-import android.app.*;import android.os.*;import android.content.*;import android.graphics.Color;import android.graphics.Typeface;import android.view.*;import android.view.inputmethod.InputMethodManager;import android.widget.*;import org.json.*;import java.text.DecimalFormat;
+import android.app.*;import android.os.*;import android.content.*;import android.graphics.Color;import android.graphics.Typeface;import android.graphics.drawable.GradientDrawable;import android.view.*;import android.view.inputmethod.InputMethodManager;import android.widget.*;import org.json.*;import java.text.DecimalFormat;import java.net.URLEncoder;
 public class MainActivity extends Activity{
  final int NAVY=Color.rgb(25,39,55), GOLD=Color.rgb(199,154,66), BG=Color.rgb(247,248,250), MUTED=Color.rgb(105,116,128); LinearLayout root,content; String base,token; DecimalFormat nf=new DecimalFormat("#,###");
  public void onCreate(Bundle b){super.onCreate(b);getWindow().setStatusBarColor(BG);getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);base=getPreferences(0).getString("base","");token=getPreferences(0).getString("token","");if(base.isEmpty()||token.isEmpty())login();else home();}
