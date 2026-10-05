@@ -16,7 +16,6 @@ jobs:
         with:
           gradle-version: '8.9'
       - name: Restore signing key
-        if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
         env:
           KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: echo "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/almas-release.jks"
