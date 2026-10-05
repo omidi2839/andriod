@@ -1,4 +1,3 @@
-plugins { id("com.android.application") }
-android { namespace = "ir.sejadalmas.salesagent"; compileSdk = 35
- defaultConfig { applicationId = "ir.sejadalmas.salesagent"; minSdk = 24; targetSdk = 35; versionCode = 2; versionName = "0.1.2" }
+plugins {
+    id("com.android.application") version "8.7.3" apply false
 }
