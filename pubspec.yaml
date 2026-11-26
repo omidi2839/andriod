@@ -1,0 +1,17 @@
+name: almas_catalog_native
+description: Almas internal exhibition catalog
+publish_to: none
+version: 1.0.4+5
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  html: ^0.15.6
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
