@@ -48,7 +48,7 @@ jobs:
         run: |
           flutter build apk --debug --dart-define="ALMAS_API_BASE=$ALMAS_API_BASE" --build-number="${GITHUB_RUN_NUMBER}"
           mkdir -p dist
-          cp build/app/outputs/flutter-apk/app-debug.apk dist/AlmasShop-1.0.1-android-test.apk
+          cp build/app/outputs/flutter-apk/app-debug.apk dist/AlmasShop-1.0.2-android-test.apk
           (cd dist && sha256sum *.apk > SHA256SUMS.txt)
       - uses: actions/upload-artifact@v4
         with:
@@ -68,8 +68,8 @@ jobs:
           flutter build apk --release --dart-define="ALMAS_API_BASE=$ALMAS_API_BASE" --build-number="${GITHUB_RUN_NUMBER}"
           flutter build appbundle --release --dart-define="ALMAS_API_BASE=$ALMAS_API_BASE" --build-number="${GITHUB_RUN_NUMBER}"
           mkdir -p release
-          cp build/app/outputs/flutter-apk/app-release.apk release/AlmasShop-1.0.1-release.apk
-          cp build/app/outputs/bundle/release/app-release.aab release/AlmasShop-1.0.1-release.aab
+          cp build/app/outputs/flutter-apk/app-release.apk release/AlmasShop-1.0.2-release.apk
+          cp build/app/outputs/bundle/release/app-release.aab release/AlmasShop-1.0.2-release.aab
           (cd release && sha256sum *.apk *.aab > SHA256SUMS.txt)
       - uses: actions/upload-artifact@v4
         if: ${{ vars.ANDROID_RELEASE_SIGNING == 'true' }}
@@ -104,7 +104,7 @@ jobs:
         run: |
           flutter build ios --release --no-codesign --dart-define="ALMAS_API_BASE=$ALMAS_API_BASE" --build-number="${GITHUB_RUN_NUMBER}"
           mkdir -p dist
-          ditto -c -k --sequesterRsrc --keepParent build/ios/iphoneos/Runner.app dist/AlmasShop-1.0.1-iOS-unsigned.zip
+          ditto -c -k --sequesterRsrc --keepParent build/ios/iphoneos/Runner.app dist/AlmasShop-1.0.2-iOS-unsigned.zip
           (cd dist && shasum -a 256 *.zip > SHA256SUMS.txt)
       - uses: actions/upload-artifact@v4
         with:
