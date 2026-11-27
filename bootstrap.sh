@@ -20,4 +20,5 @@ if 'android:usesCleartextTraffic' not in s:s=s.replace('<application','<applicat
 s=s.replace('android:label="almas_shop"','android:label="سجاد الألماس"');p.write_text(s)
 p=Path('ios/Runner/Info.plist');d=plistlib.loads(p.read_bytes());d['CFBundleDisplayName']='سجاد الألماس';p.write_bytes(plistlib.dumps(d,sort_keys=False))
 PY
+python3 ci/arabic-font.py
 flutter pub get

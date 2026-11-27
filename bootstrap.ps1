@@ -13,7 +13,9 @@ if ($s -notmatch 'android:usesCleartextTraffic') { $s=$s.Replace('<application',
 [IO.File]::WriteAllText((Join-Path $PSScriptRoot $p), $s, [System.Text.UTF8Encoding]::new($false))
 # Remove only generated default counter-app test; it does not test this app.
 if (Test-Path 'test/widget_test.dart') { $t=Get-Content 'test/widget_test.dart' -Raw; if ($t -match 'MyApp\(' -and $t -match 'counter') { Remove-Item 'test/widget_test.dart' } }
+if (Get-Command python -ErrorAction SilentlyContinue) { python ci/arabic-font.py }
 flutter pub get
-if ($LASTEXITCODE -ne 0) { throw 'flutter pub get failed' }
+if ($LASTEXITCODE -ne 0) { throw 'if (Get-Command python -ErrorAction SilentlyContinue) { python ci/arabic-font.py }
+flutter pub get failed' }
 flutter analyze
 if ($LASTEXITCODE -ne 0) { throw 'Analyze failed; inspect output before building.' }
